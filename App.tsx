@@ -1,22 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Provider as PaperProvider } from "react-native-paper";
+import { Theme } from "react-native-paper/lib/typescript/types";
 
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+import Navigation from "_navigation";
+import { MaterialIcons } from "_components";
+import { useAndroidNavigationBar, useCachedResources } from "_hooks/utils";
+import Themes from "_styles/themes";
+
+const paperSettings = {
+    icon: MaterialIcons,
+};
 
 export default function App() {
-  const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
+    const theme = Themes.light;
 
-  if (!isLoadingComplete) {
-    return null;
-  } else {
+    /** HOOKS **/
+    const loaded = useCachedResources();
+    useAndroidNavigationBar(theme.colors.background);
+
+    if (!loaded) return null;
+
     return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
+        <SafeAreaProvider>
+            <PaperProvider theme={theme as Theme} settings={paperSettings}>
+                <StatusBar
+                    style="dark"
+                    translucent={true}
+                    backgroundColor="transparent"
+                />
+
+                <Navigation />
+            </PaperProvider>
+        </SafeAreaProvider>
     );
-  }
 }
