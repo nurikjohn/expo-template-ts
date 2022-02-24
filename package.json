@@ -1,6 +1,6 @@
 {
     "name": "@nurikjohn/expo-template-ts",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Nuriddin Muhammadjanov",
     "license": "ISC",
     "main": "node_modules/expo/AppEntry.js",
@@ -55,5 +55,9 @@
         "expo-template",
         "react-native",
         "react-native-template"
-    ]
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Nurikjohn/expo-template-ts"
+    }
 }
